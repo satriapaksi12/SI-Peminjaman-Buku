@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
@@ -16,9 +19,6 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 
@@ -48,3 +48,30 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
     return redirect('/login');
 })->middleware(['auth', 'signed'])->name('verification.verify');
+
+//Profile
+Route::get('/profile', [AuthController::class, 'profile'])->middleware('auth');
+
+//Kelola user
+Route::get('/user', [UserController::class, 'index'])->middleware(['auth', 'must-superadmin']);
+Route::get('/user/{id}', [UserController::class, 'show'])->middleware(['auth', 'must-superadmin']);
+Route::get('/user-add', [UserController::class, 'create'])->middleware(['auth', 'must-superadmin']);
+Route::post('/user', [UserController::class, 'store'])->middleware(['auth', 'must-superadmin']);
+Route::get('/user-edit/{id}', [UserController::class, 'edit'])->middleware(['auth', 'must-superadmin']);
+Route::put('/user/{id}', [UserController::class, 'update'])->middleware(['auth', 'must-superadmin']);
+Route::delete('/user-destroy/{id}', [UserController::class, 'destroy'])->middleware(['auth', 'must-superadmin']);
+Route::get('/user-deleted', [UserController::class, 'deletedUser'])->middleware(['auth', 'must-superadmin']);
+Route::get('/user/{id}/restore', [UserController::class, 'restore'])->middleware(['auth', 'must-superadmin']);
+Route::get('/export-users', [UserController::class, 'exportUsers'])->middleware(['auth', 'must-superadmin']);
+Route::post('/import-users', [UserController::class, 'importUsers'])->middleware(['auth', 'must-superadmin']);
+
+//kelola role
+Route::get('/role', [RoleController::class, 'index'])->middleware(['auth', 'must-superadmin']);
+Route::get('/role-add', [RoleController::class, 'create'])->middleware(['auth', 'must-superadmin']);
+Route::post('/role', [RoleController::class, 'store'])->middleware(['auth', 'must-superadmin']);
+Route::get('/role-edit/{id}', [RoleController::class, 'edit'])->middleware(['auth', 'must-superadmin']);
+Route::put('/role/{id}', [RoleController::class, 'update'])->middleware(['auth', 'must-superadmin']);
+Route::delete('/role-destroy/{id}', [RoleController::class, 'destroy'])->middleware(['auth', 'must-superadmin']);
+Route::get('/export-roles', [RoleController::class, 'exportRoles'])->middleware(['auth', 'must-superadmin']);
+Route::post('/import-roles', [RoleController::class, 'importRoles'])->middleware(['auth', 'must-superadmin']);
+

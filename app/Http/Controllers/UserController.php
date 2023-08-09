@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -14,7 +20,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::latest()->get();
+        return view('user.user', ['userList' => $user]);
     }
 
     /**
@@ -24,7 +31,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::with('role')->get();
+        $role = Role::all();
+        return view('user.user-add', ['user' => $user, 'role' => $role]);
     }
 
     /**
@@ -33,9 +42,21 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $user = new User();
+        $user->nama = $request->nama;
+        $user->nomor_induk = $request->nomor_induk;
+        $user->email = $request->email;
+        $user->password =  Hash::make($request->password);
+        $user->role_id = $request->role_id;
+        $user->email_verified_at = Carbon::now();
+        $user->save();
+        if ($user) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Data berhasil ditambahkan');
+        }
+        return redirect('/user');
     }
 
     /**

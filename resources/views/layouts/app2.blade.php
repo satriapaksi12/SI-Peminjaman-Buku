@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEKOLAH VOKASI | @yield('title')</title>
+    <title>PustakaDigital.id | @yield('title')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.min.css ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -27,7 +27,7 @@
                         <style>
                             .logo {
                                 display: flex;
-                                align-items: center;
+                                align-items: left;
                             }
 
                             .logo img {
@@ -36,13 +36,13 @@
                                 margin-right: 5px;
                             }
 
-                            .logo h4 {
+                            .logo h5 {
                                 font-weight: bold;
                                 color: #fa8907;
                             }
                         </style>
                         <div class="logo">
-                            <h4 class="color">SI PINJAM</h4>
+                            <h5 class="color">PustakaDigital.id</h5> <br>
                         </div>
 
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
