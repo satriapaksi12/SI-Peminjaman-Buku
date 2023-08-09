@@ -12,27 +12,34 @@
                         {{ Session::get('message') }}
                     </div>
                 @endif
-                <form method="POST" action="register" class="register-form">
+                <form method="POST" action="register" class="register-form" enctype="multipart/form-data">
                     @csrf
                     <h2 class="form-title"> <span style="color: black;">PERPUSTAKAAN</span>
                         <span style="color: orange;">DIGITAL</span>
                     </h2>
                     <h1 class="text-center justify-content-center">Register</h1>
                     <div class="form-group">
+                        <label for="foto" class="form-label">Nama Lengkap</label>
                         <input type="text" class="form-input" name="nama" id="nama" placeholder="Nama" required/>
                     </div>
                     <div class="form-group">
+                        <label for="foto" class="form-label">Nomor Induk</label>
                         <input type="text" class="form-input" name="nomor_induk" id="nomor_induk"
                             placeholder="Nomor Induk" required/>
                     </div>
                     <div class="form-group">
+                        <label for="foto" class="form-label">Email</label>
                         <input type="email" class="form-input" name="email" id="email" placeholder="Email" required/>
                     </div>
                     <div class="form-group">
+                        <label for="foto" class="form-label">Password</label>
                         <input type="password" class="form-input" name="password" id="password" placeholder="Password" required />
                         <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                     </div>
-
+                    <div class="form-group">
+                        <label for="foto" class="form-label">Foto Profil</label>
+                        <input type="file" class="form-input" name="foto" id="foto" accept="image/*" />
+                    </div>
                     <div class="form-group">
                         <input type="submit" name="submit" id="submit" class="form-submit" value="Register" />
                     </div>

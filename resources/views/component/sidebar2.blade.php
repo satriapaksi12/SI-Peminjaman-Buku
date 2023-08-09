@@ -86,7 +86,7 @@
                 <span>Kelola Peminjaman Buku</span>
             </a>
         </li>
-        @elseif (Auth::user()->role_id == 3)
+        @elseif (Auth::user()->role_id != 1 && Auth::user()->role_id != 2 )
         <li class="sidebar-item  ">
             <a href="/periode" class='sidebar-link'>
                 <i class="bi bi-calendar3"></i>

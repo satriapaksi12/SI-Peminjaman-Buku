@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -65,9 +66,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, $id)
     {
-        //
+        $user = User::with('role')->findOrFail($id);
+        return view('user.user-detail', ['user' => $user]);
     }
 
     /**
@@ -76,9 +78,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user, $id)
     {
-        //
+        $user = User::with('role')->findOrFail($id);
+        $role = Role::all();
+        return view('user.user-edit', ['user' => $user,  'role' => $role]);
     }
 
     /**
@@ -88,19 +92,39 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request , User $user , $id)
     {
-        //
+        $user = User::with('role')->findOrFail($id);
+        $user->update($request->all());
+        if ($user) {
+            Session::flash('status-edit', 'success');
+            Session::flash('message-edit', 'Data berhasil diedit');
+        }
+        return redirect('/user');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
+    public function destroy(User $user, $id)
     {
-        //
+        $deletedUser = User::findORFail($id);
+        $deletedUser->delete();
+        if ($deletedUser) {
+            Session::flash('status-delete', 'success');
+            Session::flash('message-delete', 'User berhasil dinonaktifkan');
+        }
+        return redirect('/user');
+    }
+    public function deletedUser()
+    {
+        $deletedUser = User::onlyTrashed()->latest()->get();
+        return view('user.user-deleted', ['deletedUser' => $deletedUser]);
+    }
+    public function restore($id)
+    {
+        $deletedUser = User::withTrashed()->where('id', $id)->restore();
+        if ($deletedUser) {
+            Session::flash('status-restore', 'success');
+            Session::flash('message-restore', 'User berhasil diaktifkan');
+        }
+        return redirect('/user');
     }
 }

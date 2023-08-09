@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -74,4 +75,7 @@ Route::put('/role/{id}', [RoleController::class, 'update'])->middleware(['auth',
 Route::delete('/role-destroy/{id}', [RoleController::class, 'destroy'])->middleware(['auth', 'must-superadmin']);
 Route::get('/export-roles', [RoleController::class, 'exportRoles'])->middleware(['auth', 'must-superadmin']);
 Route::post('/import-roles', [RoleController::class, 'importRoles'])->middleware(['auth', 'must-superadmin']);
+
+//Kelola Kategori Buku
+Route::get('/kategori',[CategoryController::class, 'index'])->middleware(['auth']);
 

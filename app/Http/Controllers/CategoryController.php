@@ -15,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $kategori = Category::all();
+        return view('kategori.kategori', ['kategori' => $kategori]);
     }
 
     /**

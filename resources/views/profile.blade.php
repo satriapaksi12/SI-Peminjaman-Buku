@@ -10,11 +10,30 @@
                         <div class="card-body">
                                 <div class="form-body">
                                     <div class="row">
-                                        <div class="my-3  mb-3 d-flex justify-content-center">
-                                            <div class="avatar avatar-xl bg-primary me-3">
-                                                <span class="avatar-content"><i class="bi bi-person-fill"></i></span>
+                                        <div class="my-3 mb-3 d-flex justify-content-center">
+                                            <div class="profile-photo-box">
+                                                <img src="{{ asset('storage/' . $profile->nama_foto) }}" alt="Foto Profil" class="profile-photo">
                                             </div>
                                         </div>
+                                        <style>
+                                            .profile-photo-box {
+                                                width: 150px; /* Sesuaikan ukuran kotak sesuai kebutuhan */
+                                                height: 150px; /* Sesuaikan ukuran kotak sesuai kebutuhan */
+                                                border: 1px solid #ccc; /* Tambahkan garis pinggir pada kotak jika diinginkan */
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                overflow: hidden;
+                                            }
+
+                                            .profile-photo {
+                                                width: 100%;
+                                                height: auto;
+                                            }
+                                        </style>
+
+
+
                                         <div class="col-md-4">
                                             <label>Nama</label>
                                         </div>
@@ -49,6 +68,21 @@
                                             <fieldset disabled>
                                             <input type="text" name="role_id"id="role_id"
                                                 class="form-control" value="{{ $profile->role->nama_role }}" placeholder="" readonly>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Status</label>
+                                        </div>
+                                        <div class="col-md-8 form-group">
+                                            <fieldset disabled>
+                                                @if ($profile->email_verified_at != null)
+                                                <input type="text" name=""id=""
+                                                class="form-control" value="Aktif" placeholder="" readonly>
+                                                @else
+                                                <input type="text" name=""id=""
+                                                class="form-control" value="Tidak Aktif" placeholder="" readonly>
+                                                @endif
+
                                             </fieldset>
                                         </div>
                                     </div>

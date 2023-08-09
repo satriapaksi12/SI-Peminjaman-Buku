@@ -21,13 +21,44 @@ class AuthController extends Controller
     public function registerProses(Request $request)
     {
 
+        // // Validasi data input
+        // $this->validate($request, [
+        //     'nama' => 'required|string|max:255',
+        //     'nomor_induk' => 'required|string|max:255',
+        //     'email' => 'required|email|unique:users,email',
+        //     'password' => 'required|string|min:8',
+        //     'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi foto
+        // ]);
+        // // Jika ada file foto diupload, simpan dan dapatkan path-nya
+        // $fotoPath = null;
+        // if ($request->hasFile('foto')) {
+        //     $fotoPath = $request->file('foto')->store('profile_photos', 'public');
+        // }
+
+        // // Buat user baru
+        // $user = User::create([
+        //     'nama' => $request->nama,
+        //     'nomor_induk' => $request->nomor_induk,
+        //     'email' => $request->email,
+        //     'role_id' => 3,
+        //     'password' => Hash::make($request->password),
+        //     // 'nama_foto' => $fotoPath, // Simpan path foto
+        // ]);
+
+        $fotoPath = null;
+        if ($request->hasFile('foto')) {
+            $fotoPath = $request->file('foto')->store('profile_photos', 'public');
+        }
+
         $user = User::create([
             'nama' => $request->nama,
             'nomor_induk' => $request->nomor_induk,
             'email' => $request->email,
-            'role_id' => 3 ,
+            'role_id' => 3,
             'password' => Hash::make($request->password),
+            'nama_foto' => $fotoPath,
         ]);
+
         event(new Registered($user));
 
         Auth::login($user);
