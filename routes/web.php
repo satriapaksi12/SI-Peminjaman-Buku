@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
@@ -78,4 +79,16 @@ Route::post('/import-roles', [RoleController::class, 'importRoles'])->middleware
 
 //Kelola Kategori Buku
 Route::get('/kategori',[CategoryController::class, 'index'])->middleware(['auth']);
+Route::get('/kategori-add',[CategoryController::class, 'create'])->middleware(['auth']);
+Route::post('/kategori',[CategoryController::class, 'store'])->middleware(['auth']);
+Route::get('/kategori-edit/{id}',[CategoryController::class,'edit'])->middleware(['auth']);
+Route::put('/kategori/{id}', [CategoryController::class, 'update'])->middleware(['auth']);
+Route::delete('/kategori-destroy/{id}', [CategoryController::class, 'destroy'])->middleware(['auth']);
 
+//Kelola Buku
+Route::get('/buku',[BookController::class, 'index'])->middleware(['auth']);
+Route::get('/buku-add',[BookController::class, 'create'])->middleware(['auth']);
+Route::post('/buku',[BookController::class, 'store'])->middleware(['auth']);
+Route::get('/buku-edit/{id}',[BookController::class,'edit'])->middleware(['auth']);
+Route::put('/buku/{id}', [BookController::class, 'update'])->middleware(['auth']);
+Route::delete('/buku-destroy/{id}', [BookController::class, 'destroy'])->middleware(['auth']);

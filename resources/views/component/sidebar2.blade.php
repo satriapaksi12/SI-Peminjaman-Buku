@@ -24,7 +24,7 @@
             <li class="sidebar-title">Kelola Data Master</li>
 
             <li class="sidebar-item  ">
-                <a href="/periode" class='sidebar-link'>
+                <a href="/kategori" class='sidebar-link'>
                     <i class="bi bi-calendar3"></i>
                     <span>Kelola Kategori Buku</span>
                 </a>
