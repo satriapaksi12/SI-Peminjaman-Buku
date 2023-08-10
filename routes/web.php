@@ -92,3 +92,5 @@ Route::post('/buku',[BookController::class, 'store'])->middleware(['auth']);
 Route::get('/buku-edit/{id}',[BookController::class,'edit'])->middleware(['auth']);
 Route::put('/buku/{id}', [BookController::class, 'update'])->middleware(['auth']);
 Route::delete('/buku-destroy/{id}', [BookController::class, 'destroy'])->middleware(['auth']);
+
+//tes

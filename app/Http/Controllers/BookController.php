@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Models\Category;
 
 class BookController extends Controller
 {
@@ -15,7 +16,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $buku = Book::all();
+        return view('buku.buku', ['buku' => $buku]);
     }
 
     /**
@@ -25,7 +27,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $kategori = Category::all();
+        return view('buku.buku-add', ['kategori' => $kategori]);
     }
 
     /**

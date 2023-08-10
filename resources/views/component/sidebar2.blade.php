@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li class="sidebar-item  ">
-                <a href="/periode" class='sidebar-link'>
+                <a href="/buku" class='sidebar-link'>
                     <i class="bi bi-calendar3"></i>
                     <span>Kelola Buku</span>
                 </a>
